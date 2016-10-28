@@ -1,1 +1,1 @@
-web: python QuoteBot.py
+worker: python QuoteBot.py
