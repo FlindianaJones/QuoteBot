@@ -21,7 +21,7 @@ def handle_command(command, channel):
         returns back what it needs for clarification.
     """
     response = "Cool story bro."
-    r = redis.StrictRedis(host='localhost', port=6379, db=0)
+    r = redis.from_url(os.environ.get("REDIS_URL")
     if QUOTE_ADD in command:
         if re.match('^"[^"]+"\s*\-\-\w+$', command):
             parts = command.split(QUOTE_ADD)
