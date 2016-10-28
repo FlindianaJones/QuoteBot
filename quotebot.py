@@ -11,7 +11,7 @@ USR_CMD = "users"
 HELP_CMD = "help"
 QUOTE_ADD = "--"
 
-slack_client = SlackClient('xoxb-97142493925-YeYOZogNpazr68PiSSVGTE0R')
+slack_client = SlackClient('howdoesthisworklol')
         
         
 def handle_command(command, channel):
