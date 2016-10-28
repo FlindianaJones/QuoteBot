@@ -1,0 +1,6 @@
+redis==2.10.5
+requests==2.11.1
+six==1.10.0
+slack-client==0.3.0
+slackclient==1.0.2
+websocket-client==0.37.0

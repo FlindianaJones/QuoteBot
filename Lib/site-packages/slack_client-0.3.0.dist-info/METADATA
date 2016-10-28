@@ -1,0 +1,25 @@
+Metadata-Version: 2.0
+Name: slack-client
+Version: 0.3.0
+Summary: An interface for the Slack web API
+Home-page: https://github.com/Shir0kamii/slack-client
+Author: shir0kamii
+Author-email: Shir0kamii@prologin.org
+License: MIT
+Keywords: slack api interface
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Communications
+Classifier: Topic :: Software Development :: User Interfaces
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Requires-Dist: requests
+
+# slack-client
+
+Slack-client is meant to be used as an interface for the Slack API.
+

@@ -1,10 +1,10 @@
+import os
 import time
 import redis
 from slackclient import SlackClient
 from random import randint
 import re
 
-#this is likely the bot trigger?
 BASE_CMD = "quote "
 LIST_CMD = "all"
 USR_CMD = "users"
@@ -12,7 +12,7 @@ HELP_CMD = "help"
 QUOTE_ADD = "--"
 
 slack_client = SlackClient(os.environ['API_KEY'])
-        
+       
         
 def handle_command(command, channel):
     """
@@ -24,7 +24,7 @@ def handle_command(command, channel):
     r = redis.StrictRedis(host='localhost', port=6379, db=0)
     if QUOTE_ADD in command:
         if re.match('^"[^"]+"\s*\-\-\w+$', command):
-            parts = command.split(QUOTE_ADD);
+            parts = command.split(QUOTE_ADD)
             res = 0
             if len(parts) > 1 and parts[1] and parts[0]:
                 res = r.append(parts[1].lower(), parts[0] + ";")#should create if not there
@@ -33,9 +33,9 @@ def handle_command(command, channel):
                 else:
                     response = "Failure storing quote"
             else:
-                response = "";#this is probably someone using bolo
+                response = ""#this is probably someone using bolo
         else:
-            response = "";#this is probably someone using bolo
+            response = ""#this is probably someone using bolo
     if command.startswith(BASE_CMD + HELP_CMD):
         response = "To enter a quote, type it in this form:\n\"I hate mondays\"\
  --Garfield\nNo spaces in the person you attribute the quote to, nothing \
@@ -46,7 +46,7 @@ quote users"
     if command.startswith(BASE_CMD + LIST_CMD):
         parts = command.split(' ')#get the words
         if len(parts) > 2 and parts[2]:
-            response = "Here are " + parts[2].title() + "'s quotes:\n";
+            response = "Here are " + parts[2].title() + "'s quotes:\n"
             rQuotes = r.get(parts[2].lower())
             if rQuotes and len(rQuotes) > 0:
                 pQuotes = rQuotes.decode().split(";")
