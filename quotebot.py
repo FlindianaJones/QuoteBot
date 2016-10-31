@@ -12,6 +12,7 @@ from slackclient import SlackClient
 BASE_CMD = "quote "
 LIST_CMD = "all"
 USR_CMD = "users"
+RANDOM_CMD = "random"
 HELP_CMD = "help"
 QUOTE_ADD = "--"
 
@@ -82,9 +83,21 @@ To see who has quotes, ask like this:
             response.strip()
         else:
             response = "Apparently nobody is funny yet, meatbag."
+    if command == BASE_CMD + RANDOM_CMD:
+        r_users = r.keys('*')
+        if r_users:
+            r_users_len = len(r_users)
+            index = randint(0, r_users_len - 2) if r_users_len > 1 else 0
+            p_user = r_users[index]
+            r_quotes = r.get(p_user)
+            p_quotes = r_quotes.decode().split(";")
+            p_quotes_len = len(p_quotes)
+            index = randint(0, p_quotes_len - 2) if p_quotes_len > 1 else 0
+            response = p_user.decode().title() + ": " + p_quotes[index]
     # The base, get a random quote case.
     if (LIST_CMD not in command and QUOTE_ADD not in command and
-       USR_CMD not in command and HELP_CMD not in command):
+       USR_CMD not in command and HELP_CMD not in command and 
+       RANDOM_CMD not in command):
         parts = command.split(' ')  # get the words
         if len(parts) > 1 and parts[1]:
             r_quotes = r.get(parts[1].lower())
@@ -96,7 +109,7 @@ To see who has quotes, ask like this:
             else:
                 response = "I guess " + parts[1] + " isn't funny, meatbag."
         else:
-            response = "Whose quote, meatbag?"
+            response = ""
     if response:
         slack_client.api_call("chat.postMessage", channel=channel,
                               text=response, as_user=True)
